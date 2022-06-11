@@ -29,11 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Future loginwithemail(BuildContext context) async {
     if (_formKey.currentState.validate()) {
-
-          
-
-
-      
       try {
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(
@@ -67,14 +62,18 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final provider =
           Provider.of<GoogleSignInProvider>(context, listen: false);
-      provider.googleLogin().then((value) => Fluttertoast.showToast(
-          msg: "Login Successful",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black87,
-          textColor: Colors.white,
-          fontSize: 16.0));
+      provider
+          .googleLogin()
+          .then((value) => Fluttertoast.showToast(
+              msg: "Login Successful",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black87,
+              textColor: Colors.white,
+              fontSize: 16.0))
+          .then((value) => Navigator.of(context)
+              .pushNamedAndRemoveUntil(MyRoutes.homeRoute, (route) => false));
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(
           msg: e.message,

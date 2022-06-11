@@ -80,6 +80,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
+
+                Navigator.pushNamed(context, MyRoutes.initialRoute);
               },
               leading: const Icon(
                 CupertinoIcons.backward_end,
